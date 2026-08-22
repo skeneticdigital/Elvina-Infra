@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AboutSection from '@/components/AboutSection';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { CheckCircle2, Award, HardHat, Clock, ShieldCheck, Ruler, Home, Building2, Factory, Hammer, Key, Shield, Lightbulb, Search, Target, Handshake } from 'lucide-react';
 import Image from 'next/image';
@@ -95,6 +96,9 @@ export default function AboutPage() {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* AboutSection (David Elvira) */}
+      <AboutSection variant="about" />
 
       {/* Our Story & Who We Are */}
       <section className="py-24 md:py-32 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10 bg-[#071220]">
@@ -206,54 +210,72 @@ export default function AboutPage() {
 
       {/* Why Choose Us & Values */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h3 className="text-sm font-mono text-[#3B82F6] uppercase tracking-widest mb-4">Why Choose Elvina Infra</h3>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Excellence Engineered.</h2>
-            <ul className="space-y-4 mb-8 text-neutral-300">
-              {['Quality Construction', 'Experienced Team', 'On-Time Delivery', 'Transparent Pricing', 'Safety First', 'Modern Construction Methods'].map((point) => (
-                <li key={point} className="flex items-center space-x-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#3B82F6]" />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-            
-            <div className="bg-[#050C16] border border-[#1B4D89]/30 p-6 rounded-xl mb-6">
-              <h4 className="font-bold text-white mb-2">Our Mission</h4>
-              <p className="text-sm text-neutral-400">To deliver uncompromised quality, prioritize site safety, and ensure ultimate customer satisfaction in every structural endeavor.</p>
-            </div>
-            <div className="bg-[#050C16] border border-[#1B4D89]/30 p-6 rounded-xl">
-              <h4 className="font-bold text-white mb-2">Our Vision</h4>
-              <p className="text-sm text-neutral-400">To be the most trusted and leading construction company, shaping skylines with sustainable and innovative architecture.</p>
-            </div>
-          </div>
+        
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h3 className="text-sm font-mono text-[#3B82F6] uppercase tracking-widest mb-4">Why Choose Elvina Infra</h3>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">Excellence Engineered.</h2>
+          <p className="max-w-2xl mx-auto text-neutral-400 text-lg">
+            We don't just build structures; we build trust through uncompromised quality, transparent processes, and innovative engineering.
+          </p>
+        </div>
 
-          {/* Core Values - Staggered Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {[
-              { name: 'Integrity', icon: <Shield /> },
-              { name: 'Quality', icon: <Award /> },
-              { name: 'Safety', icon: <HardHat /> },
-              { name: 'Innovation', icon: <Lightbulb /> },
-              { name: 'Transparency', icon: <Search /> },
-              { name: 'Commitment', icon: <Handshake /> }
-            ].map((value, i) => (
-              <motion.div
-                key={value.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="bg-[#0E223D] border border-[#1B4D89]/30 py-8 px-6 rounded-xl flex flex-col items-center justify-center text-center shadow-lg min-h-[140px]"
-              >
-                <div className="w-12 h-12 rounded-full bg-[#3B82F6]/20 flex items-center justify-center mb-4 text-[#3B82F6]">
-                  {React.cloneElement(value.icon as React.ReactElement, { className: 'w-6 h-6' })}
-                </div>
-                <span className="font-bold text-sm tracking-wider uppercase">{value.name}</span>
-              </motion.div>
-            ))}
+        {/* Mission & Vision Side by Side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+          <div className="bg-[#050C16] border border-[#1B4D89]/30 p-8 md:p-12 rounded-2xl shadow-2xl shadow-[#0E223D]/50 relative overflow-hidden group hover:border-[#3B82F6]/50 transition-colors">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#3B82F6] to-transparent"></div>
+            <h4 className="font-black text-white mb-6 text-3xl flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-[#3B82F6]/20 flex items-center justify-center text-[#3B82F6]">
+                <Target className="w-6 h-6" />
+              </div>
+              Our Mission
+            </h4>
+            <p className="text-lg text-neutral-300 leading-relaxed">
+              Our mission is to deliver high-quality, safe, and reliable construction projects across government and private sectors. We are committed to maintaining strong engineering standards, transparent practices, timely project completion, and cost-effective solutions while building lasting relationships with our clients.
+            </p>
           </div>
+          
+          <div className="bg-[#050C16] border border-[#1B4D89]/30 p-8 md:p-12 rounded-2xl shadow-2xl shadow-[#0E223D]/50 relative overflow-hidden group hover:border-[#3B82F6]/50 transition-colors">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#3B82F6] to-transparent"></div>
+            <h4 className="font-black text-white mb-6 text-3xl flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-[#3B82F6]/20 flex items-center justify-center text-[#3B82F6]">
+                <Lightbulb className="w-6 h-6" />
+              </div>
+              Our Vision
+            </h4>
+            <p className="text-lg text-neutral-300 leading-relaxed">
+              Our vision is to become a trusted and leading construction company recognized for quality, integrity, innovation, and excellence. We aim to create durable infrastructure and modern spaces that contribute to sustainable development and deliver long-term value to our clients and communities.
+            </p>
+          </div>
+        </div>
+
+        {/* Core Values 6 Boxes Grid */}
+        <div className="text-center mb-10">
+          <h3 className="text-xl font-bold uppercase tracking-widest text-white/80">Our Core Values</h3>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {[
+            { name: 'Integrity', icon: <Shield /> },
+            { name: 'Quality', icon: <Award /> },
+            { name: 'Safety', icon: <HardHat /> },
+            { name: 'Innovation', icon: <Lightbulb /> },
+            { name: 'Transparency', icon: <Search /> },
+            { name: 'Commitment', icon: <Handshake /> }
+          ].map((value, i) => (
+            <motion.div
+              key={value.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="bg-[#0E223D] border border-[#1B4D89]/30 py-8 px-4 rounded-xl flex flex-col items-center justify-center text-center shadow-lg hover:bg-[#1B4D89]/50 transition-colors group"
+            >
+              <div className="w-14 h-14 rounded-full bg-[#3B82F6]/20 flex items-center justify-center mb-4 text-[#3B82F6] group-hover:scale-110 group-hover:bg-[#3B82F6]/30 transition-all">
+                {React.cloneElement(value.icon as React.ReactElement, { className: 'w-7 h-7' })}
+              </div>
+              <span className="font-bold text-sm tracking-wider uppercase text-neutral-200">{value.name}</span>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -265,14 +287,14 @@ export default function AboutPage() {
             {/* Left Content */}
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <h3 className="text-sm font-mono text-[#3B82F6] uppercase tracking-widest mb-4">Portfolio</h3>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">Landmark Projects That Define Us.</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">Driving Progress Through Infrastructure.</h2>
               <p className="text-neutral-400 leading-relaxed mb-8">
-                From towering commercial skyscrapers to expansive industrial facilities, our portfolio is a testament to our commitment to structural integrity, aesthetic brilliance, and on-time delivery. We don't just build structures; we build legacies.
+                With a strong emphasis on government projects and road contracts, Elvina Infra has successfully delivered numerous large-scale infrastructure developments. Our portfolio is a testament to our commitment to national growth, structural integrity, and timely project execution in the public sector.
               </p>
               <ul className="space-y-4 mb-8 text-sm font-mono text-neutral-300">
-                <li className="flex items-center space-x-3"><Target className="w-4 h-4 text-[#3B82F6]" /><span>100+ Megaprojects Delivered</span></li>
-                <li className="flex items-center space-x-3"><Target className="w-4 h-4 text-[#3B82F6]" /><span>Award-winning Safety Records</span></li>
-                <li className="flex items-center space-x-3"><Target className="w-4 h-4 text-[#3B82F6]" /><span>Sustainable & Green Buildings</span></li>
+                <li className="flex items-center space-x-3"><Target className="w-4 h-4 text-[#3B82F6]" /><span>Major Government Contracts</span></li>
+                <li className="flex items-center space-x-3"><Target className="w-4 h-4 text-[#3B82F6]" /><span>National Highway Expansions</span></li>
+                <li className="flex items-center space-x-3"><Target className="w-4 h-4 text-[#3B82F6]" /><span>State Infrastructure Development</span></li>
               </ul>
               <a href="/services" className="text-[#3B82F6] font-bold uppercase tracking-widest text-sm hover:text-white transition-colors flex items-center space-x-2">
                 <span>View All Projects</span>
@@ -283,8 +305,8 @@ export default function AboutPage() {
             {/* Right Images */}
             <div className="grid grid-cols-1 gap-8">
               {[
-                { name: 'Vanguard Sky Residences', img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop' },
-                { name: 'Monolithic Diagrid Centre', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop' }
+                { name: 'National Highway Phase II', img: 'https://images.unsplash.com/photo-1503708928676-1cb796a0891e?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8aGlnaHdheSUyMGNvbnN0cnVjdGlvbnxlbnwwfHx8fDE3ODc2MzcyMTZ8MA&ixlib=rb-4.1.0' },
+                { name: 'Coastal Bridge Infrastructure', img: 'https://images.unsplash.com/photo-1529792083865-d23889753466?ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8aGlnaHdheSUyMGNvbnN0cnVjdGlvbnxlbnwwfHx8fDE3ODc2MzcyMTZ8MA&ixlib=rb-4.1.0' }
               ].map((proj, i) => (
                 <motion.div
                   key={proj.name}

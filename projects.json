@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "Vanguard Sky Residences",
+    "category": "Residential",
+    "status": "Pre-Order",
+    "location": "Downtown Metro",
+    "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "National Highway Expansion Phase II",
+    "category": "Road Contract",
+    "status": "Live",
+    "location": "State Route 45",
+    "image": "https://images.unsplash.com/photo-1503708928676-1cb796a0891e?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8aGlnaHdheSUyMGNvbnN0cnVjdGlvbnxlbnwwfHx8fDE3ODc2MzcyMTZ8MA&ixlib=rb-4.1.0",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "Monolithic Diagrid Centre",
+    "category": "Commercial",
+    "status": "Completed",
+    "location": "Financial District",
+    "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
+    "featured": false
+  },
+  {
+    "id": 4,
+    "title": "Serenity Lake Villas",
+    "category": "Residential",
+    "status": "Live",
+    "location": "Westside Hills",
+    "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop",
+    "featured": false
+  },
+  {
+    "id": 5,
+    "title": "Elevate Tech Park",
+    "category": "Commercial",
+    "status": "Pre-Order",
+    "location": "Cyber Valley",
+    "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
+    "featured": false
+  },
+  {
+    "id": 6,
+    "title": "Coastal Bridge Infrastructure",
+    "category": "Road Contract",
+    "status": "Completed",
+    "location": "Bay Area",
+    "image": "https://images.unsplash.com/photo-1529792083865-d23889753466?ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8aGlnaHdheSUyMGNvbnN0cnVjdGlvbnxlbnwwfHx8fDE3ODc2MzcyMTZ8MA&ixlib=rb-4.1.0",
+    "featured": true
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "question": "What services do you offer?",
+    "answer": "We offer a wide range of construction services including residential, commercial, and government infrastructure projects, specializing in state and national highway contracts."
+  },
+  {
+    "id": 2,
+    "question": "How can I request a quote?",
+    "answer": "You can request a quote by visiting our Contact page and filling out the inquiry form, or by directly calling us at +91 63690 49059."
+  },
+  {
+    "id": 3,
+    "question": "Where are you located?",
+    "answer": "Our headquarters are located in Chennai, Tamil Nadu, India, but we handle projects across multiple states."
+  }
+]

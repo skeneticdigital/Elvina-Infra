@@ -1,7 +1,12 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
-export default function AboutSection() {
+export default function AboutSection({ variant = 'home' }: { variant?: 'home' | 'about' }) {
+  const isAbout = variant === 'about';
+
   return (
     <section className="relative w-full bg-white text-black py-24 md:py-32 overflow-hidden flex justify-center">
       {/* Light aesthetic diagonal background */}
@@ -15,21 +20,31 @@ export default function AboutSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col md:flex-row items-center md:items-start gap-16 md:gap-24">
         
-        {/* Left Side: Square Photo + Info */}
-        <div className="flex flex-col items-center md:items-start flex-shrink-0">
-          <div className="w-64 h-64 md:w-80 md:h-80 relative mb-6 shadow-2xl overflow-hidden rounded-md border border-gray-100">
-            {/* Placeholder image for a professional architect/director */}
+        {/* Left Side: Photo + Info */}
+        <motion.div 
+          initial={{ opacity: 0, x: isAbout ? 0 : -50, y: isAbout ? -50 : 0 }}
+          whileInView={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-100px" }}
+          className={`flex flex-col items-center md:items-start flex-shrink-0 z-10 ${isAbout ? '-mt-12 md:-mt-32' : 'p-2'}`}
+        >
+          <div className={`relative mb-6 shadow-2xl overflow-hidden border border-gray-200 ${
+            isAbout 
+              ? 'w-[85vw] sm:w-[320px] md:w-[350px] lg:w-[380px] h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] rounded-b-2xl md:rounded-t-none rounded-t-2xl' 
+              : 'w-64 h-64 md:w-80 md:h-80 rounded-full'
+          }`}>
+            {/* Portrait image for the Managing Director */}
             <img
-              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop"
-              alt="Chief Architect"
-              className="object-cover w-full h-full transition-all duration-500"
+              src={isAbout ? "https://cdn.corenexis.com/f/vQAL4t4XYea.jpeg" : "https://cdn.corenexis.com/f/LYfjSr6U7aD.jpeg"}
+              alt="Gunaseelan"
+              className="object-cover object-top w-full h-full transition-all duration-700 hover:scale-105"
             />
           </div>
-          <h3 className="text-2xl md:text-3xl font-serif font-bold text-gray-900">David Elvira</h3>
-          <p className="text-sm md:text-base font-semibold tracking-widest text-[#B58529] uppercase mt-2">
+          <h3 className={`font-serif font-bold text-gray-900 mt-2 ${isAbout ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'}`}>Gunaseelan</h3>
+          <p className={`font-semibold tracking-widest text-[#B58529] uppercase mt-2 ${isAbout ? 'text-base md:text-lg' : 'text-sm md:text-base'}`}>
             Managing Director & Chief Architect
           </p>
-        </div>
+        </motion.div>
 
         {/* Right Side: Content */}
         <div className="flex flex-col justify-center max-w-2xl md:pt-4">
