@@ -76,8 +76,12 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href)}
                     className="text-base font-mono tracking-widest text-[#E2E8F0] hover:text-white transition-colors duration-200 uppercase relative group py-1 mx-2"
+                    onClick={(e) => {
+                      if (link.href.startsWith('/#') || (link.href === '/' && window.location.pathname === '/')) {
+                        handleLinkClick(e, link.href);
+                      }
+                    }}
                   >
                     {link.name}
                     <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#3B82F6] transition-all duration-300 group-hover:w-full" />
