@@ -1,58 +1,36 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-export interface FAQ {
-  id: number;
-  question: string;
-  answer: string;
-}
-
-const faqsFilePath = path.join(process.cwd(), 'chatbot_faqs.json');
-
-function getFAQs(): FAQ[] {
-  try {
-    if (!fs.existsSync(faqsFilePath)) {
-      fs.writeFileSync(faqsFilePath, JSON.stringify([]));
-      return [];
-    }
-    const data = fs.readFileSync(faqsFilePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('Error reading FAQs:', error);
-    return [];
-  }
-}
-
-function saveFAQs(faqs: FAQ[]) {
-  try {
-    fs.writeFileSync(faqsFilePath, JSON.stringify(faqs, null, 2));
-  } catch (error) {
-    console.error('Error saving FAQs:', error);
-  }
-}
+import prisma from '@/lib/prisma';
 
 export async function GET() {
-  const faqs = getFAQs();
-  return NextResponse.json(faqs);
+  try {
+    const faqs = await prisma.faq.findMany({
+      orderBy: { createdAt: 'desc' }
+    });
+    return NextResponse.json(faqs);
+  } catch (error) {
+    console.error('Error fetching FAQs:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
 }
 
 export async function POST(request: Request) {
   try {
-    const newFAQ = await request.json();
-    const faqs = getFAQs();
+    const { question, answer } = await request.json();
     
-    const faq: FAQ = {
-      id: Date.now(),
-      question: newFAQ.question,
-      answer: newFAQ.answer,
-    };
+    if (!question || !answer) {
+      return NextResponse.json({ error: 'Question and answer are required' }, { status: 400 });
+    }
     
-    faqs.push(faq);
-    saveFAQs(faqs);
+    const newFaq = await prisma.faq.create({
+      data: {
+        question,
+        answer,
+      }
+    });
     
-    return NextResponse.json(faq, { status: 201 });
+    return NextResponse.json(newFaq, { status: 201 });
   } catch (error) {
+    console.error('Error creating FAQ:', error);
     return NextResponse.json({ error: 'Failed to create FAQ' }, { status: 500 });
   }
 }
@@ -66,12 +44,13 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: 'FAQ ID is required' }, { status: 400 });
     }
     
-    let faqs = getFAQs();
-    faqs = faqs.filter(faq => faq.id !== Number(id));
-    saveFAQs(faqs);
+    await prisma.faq.delete({
+      where: { id: parseInt(id) }
+    });
     
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error('Error deleting FAQ:', error);
     return NextResponse.json({ error: 'Failed to delete FAQ' }, { status: 500 });
   }
 }
