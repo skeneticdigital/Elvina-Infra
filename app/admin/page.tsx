@@ -35,7 +35,7 @@ export default function AdminPage() {
     category: 'Residential',
     status: 'Live',
     location: '',
-    image: '',
+    image: 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=800&auto=format&fit=crop',
     featured: false,
   });
 
@@ -166,7 +166,7 @@ export default function AdminPage() {
           category: 'Residential',
           status: 'Live',
           location: '',
-          image: '',
+          image: 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=800&auto=format&fit=crop',
           featured: false,
         });
       } else {
@@ -510,21 +510,7 @@ export default function AdminPage() {
                       required
                     />
                   </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <label className="text-xs font-mono text-neutral-400 uppercase tracking-widest">Image URL</label>
-                    <div className="relative">
-                      <ImageIcon className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500" />
-                      <input 
-                        type="url" 
-                        value={newProject.image}
-                        onChange={(e) => setNewProject({...newProject, image: e.target.value})}
-                        placeholder="https://images.unsplash.com/..."
-                        className="w-full bg-[#050C16] border border-[#1B4D89]/40 rounded-lg pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-[#3B82F6]" 
-                        required
-                      />
-                    </div>
-                    <p className="text-[10px] text-neutral-500 mt-1 font-mono">Use direct image links (e.g. from Unsplash or image hosting services).</p>
-                  </div>
+
                   <div className="space-y-2 md:col-span-2">
                     <label className="flex items-center gap-3 cursor-pointer">
                       <input 

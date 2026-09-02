@@ -16,23 +16,33 @@ export interface Project {
 
 const dataFilePath = path.join(process.cwd(), 'projects.json');
 
+// In-memory cache for Vercel (since it's a read-only filesystem)
+let memoryProjects: Project[] | null = null;
+
 function getProjects(): Project[] {
+  if (memoryProjects) return memoryProjects;
+
   try {
     if (fs.existsSync(dataFilePath)) {
       const fileData = fs.readFileSync(dataFilePath, 'utf8');
-      return JSON.parse(fileData);
+      memoryProjects = JSON.parse(fileData);
+      return memoryProjects as Project[];
     }
   } catch (error) {
     console.error('Error reading projects data from fs, falling back to bundled data:', error);
   }
-  return projectsData as Project[];
+  
+  memoryProjects = [...(projectsData as Project[])];
+  return memoryProjects;
 }
 
 function saveProjects(projects: Project[]) {
+  memoryProjects = projects; // Update in-memory state
   try {
     fs.writeFileSync(dataFilePath, JSON.stringify(projects, null, 2), 'utf8');
   } catch (error) {
-    console.error('Error writing projects data:', error);
+    // This is expected on Vercel, so we just log and continue since in-memory is updated
+    console.warn('Could not write to fs (likely Vercel environment). Data saved in memory only.');
   }
 }
 
