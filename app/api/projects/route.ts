@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+import projectsData from '../../../projects.json';
+
 export interface Project {
   id: number;
   title: string;
@@ -21,9 +23,9 @@ function getProjects(): Project[] {
       return JSON.parse(fileData);
     }
   } catch (error) {
-    console.error('Error reading projects data:', error);
+    console.error('Error reading projects data from fs, falling back to bundled data:', error);
   }
-  return [];
+  return projectsData as Project[];
 }
 
 function saveProjects(projects: Project[]) {
