@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { title, category, status, location, image, featured } = body;
 
-    if (!title || !category || !status || !location || !image) {
+    if (!title || !category || !status || !location) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
         category,
         status,
         location,
-        image,
+        image: image || '/placeholder-project.jpg',
         featured: featured || false,
       }
     });
