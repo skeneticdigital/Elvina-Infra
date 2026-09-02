@@ -77,7 +77,7 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link.href)}
-                    className="text-xs font-mono tracking-widest text-[#CBD5E1] hover:text-white transition-colors duration-200 uppercase relative group py-1"
+                    className="text-base font-mono tracking-widest text-[#E2E8F0] hover:text-white transition-colors duration-200 uppercase relative group py-1 mx-2"
                   >
                     {link.name}
                     <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#3B82F6] transition-all duration-300 group-hover:w-full" />
@@ -116,7 +116,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="text-sm font-mono tracking-widest text-[#CBD5E1] hover:text-[#3B82F6] transition-colors py-2 border-b border-white/5"
+                  className="text-base font-mono tracking-widest text-[#E2E8F0] hover:text-[#3B82F6] transition-colors py-2 border-b border-white/10"
                 >
                   {link.name}
                 </Link>
