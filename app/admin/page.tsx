@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, Calendar, Trash2, CheckCircle, Search, LogOut, Briefcase, Plus, X, Image as ImageIcon, MapPin } from 'lucide-react';
 import TransparentLogo from '@/components/TransparentLogo';
-import type { Inquiry } from '../api/inquiries/route';
-import type { Project } from '../api/projects/route';
+import type { Inquiry, Project } from '@prisma/client';
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -229,7 +228,7 @@ export default function AdminPage() {
   const filteredInquiries = inquiries.filter(inq => 
     inq.name.toLowerCase().includes(searchInquiry.toLowerCase()) || 
     inq.email.toLowerCase().includes(searchInquiry.toLowerCase()) ||
-    inq.projectType.toLowerCase().includes(searchInquiry.toLowerCase())
+    (inq.projectType || '').toLowerCase().includes(searchInquiry.toLowerCase())
   );
 
   const unreadCount = inquiries.filter(i => i.status === 'Unread').length;
