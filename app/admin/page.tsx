@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, Calendar, Trash2, CheckCircle, Search, LogOut, Briefcase, Plus, X, Image as ImageIcon, MapPin } from 'lucide-react';
 import TransparentLogo from '@/components/TransparentLogo';
-import type { Inquiry, Project } from '@prisma/client';
+import type { Inquiry } from '../api/inquiries/route';
+import type { Project } from '../api/projects/route';
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -228,7 +229,7 @@ export default function AdminPage() {
   const filteredInquiries = inquiries.filter(inq => 
     inq.name.toLowerCase().includes(searchInquiry.toLowerCase()) || 
     inq.email.toLowerCase().includes(searchInquiry.toLowerCase()) ||
-    (inq.projectType || '').toLowerCase().includes(searchInquiry.toLowerCase())
+    inq.projectType.toLowerCase().includes(searchInquiry.toLowerCase())
   );
 
   const unreadCount = inquiries.filter(i => i.status === 'Unread').length;
@@ -541,10 +542,7 @@ export default function AdminPage() {
               ) : (
                 projects.map((project) => (
                   <div key={project.id} className="bg-[#0E223D]/50 border border-[#1B4D89]/30 rounded-xl p-4 flex gap-4 transition-colors hover:border-[#1B4D89]/60 group">
-                    <div className="w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden relative bg-[#050C16]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
-                    </div>
+
                     <div className="flex-grow flex flex-col justify-between py-1">
                       <div>
                         <div className="flex justify-between items-start">

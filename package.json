@@ -7,15 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
-    "db:push": "prisma db push"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.21.0",
     "framer-motion": "^11.18.2",
     "isomorphic-git": "^1.41.8",
     "lucide-react": "^0.475.0",
-    "motion-dom": "^13.2.0",
     "mysql2": "^3.24.3",
     "next": "^14.2.24",
     "react": "^18.3.1",
