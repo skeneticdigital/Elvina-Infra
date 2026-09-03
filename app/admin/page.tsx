@@ -3,8 +3,28 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, Calendar, Trash2, CheckCircle, Search, LogOut, Briefcase, Plus, X, Image as ImageIcon, MapPin } from 'lucide-react';
 import TransparentLogo from '@/components/TransparentLogo';
-import type { Inquiry } from '../api/inquiries/route';
-import type { Project } from '../api/projects/route';
+export interface Inquiry {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string | null;
+  projectType?: string | null;
+  message: string;
+  status: string;
+  timestamp: string | Date;
+}
+
+export interface Project {
+  id: number;
+  title: string;
+  category: string;
+  status: string;
+  location: string;
+  image: string;
+  featured: boolean;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+}
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
