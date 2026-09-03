@@ -249,7 +249,7 @@ export default function AdminPage() {
   const filteredInquiries = inquiries.filter(inq => 
     inq.name.toLowerCase().includes(searchInquiry.toLowerCase()) || 
     inq.email.toLowerCase().includes(searchInquiry.toLowerCase()) ||
-    inq.projectType.toLowerCase().includes(searchInquiry.toLowerCase())
+    (inq.projectType?.toLowerCase().includes(searchInquiry.toLowerCase()) || false)
   );
 
   const unreadCount = inquiries.filter(i => i.status === 'Unread').length;
