@@ -1,12 +1,10 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import pool from '@/lib/db';
 
 export async function GET() {
   try {
-    const projects = await prisma.project.findMany({
-      orderBy: { createdAt: 'desc' }
-    });
-    return NextResponse.json(projects);
+    const [rows] = await pool.query('SELECT * FROM Project ORDER BY createdAt DESC');
+    return NextResponse.json(rows);
   } catch (error) {
     console.error('Error fetching projects:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
@@ -22,18 +20,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
-    const newProject = await prisma.project.create({
-      data: {
-        title,
-        category,
-        status,
-        location,
-        image: image || '/placeholder-project.jpg',
-        featured: featured || false,
-      }
-    });
+    const [result]: any = await pool.query(
+      `INSERT INTO Project (title, category, status, location, image, featured, createdAt, updatedAt)
+       VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())`,
+      [title, category, status, location, image || '/placeholder-project.jpg', featured || false]
+    );
 
-    return NextResponse.json({ success: true, project: newProject }, { status: 201 });
+    // Fetch the newly created record
+    const [newRows]: any = await pool.query('SELECT * FROM Project WHERE id = ?', [result.insertId]);
+
+    return NextResponse.json({ success: true, project: newRows[0] }, { status: 201 });
   } catch (error) {
     console.error('Error processing POST project:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
@@ -49,9 +45,7 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: 'ID is required' }, { status: 400 });
     }
 
-    await prisma.project.delete({
-      where: { id: parseInt(id) }
-    });
+    await pool.query('DELETE FROM Project WHERE id = ?', [parseInt(id, 10)]);
 
     return NextResponse.json({ success: true });
   } catch (error) {
