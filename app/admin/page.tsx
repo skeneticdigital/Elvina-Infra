@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, Calendar, Trash2, CheckCircle, Search, LogOut, Briefcase, Plus, X, Image as ImageIcon, MapPin } from 'lucide-react';
+import { Mail, Phone, Calendar, Trash2, CheckCircle, Search, LogOut, Briefcase, Plus, X, Image as ImageIcon, MapPin, Eye, EyeOff } from 'lucide-react';
 import TransparentLogo from '@/components/TransparentLogo';
 export interface Inquiry {
   id: string;
@@ -30,6 +30,7 @@ export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
 
   const [activeTab, setActiveTab] = useState<'inquiries' | 'projects' | 'chatbot'>('inquiries');
@@ -282,13 +283,22 @@ export default function AdminPage() {
             
             <div className="space-y-2">
               <label className="text-xs font-mono text-neutral-400 uppercase tracking-widest">Password</label>
-              <input 
-                type="password" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-[#050C16] border border-[#1B4D89]/40 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#3B82F6]" 
-                required
-              />
+              <div className="relative">
+                <input 
+                  type={showPassword ? "text" : "password"} 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-[#050C16] border border-[#1B4D89]/40 rounded-lg px-4 py-3 pr-10 text-sm text-white focus:outline-none focus:border-[#3B82F6]" 
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-white transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
 
             {loginError && (
